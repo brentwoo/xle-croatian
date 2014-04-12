@@ -1,0 +1,175 @@
+TOY    ENGLISH   CONFIG (1.0)
+ROOTCAT  S.
+FILES  .
+LEXENTRIES   (TOY ENGLISH).
+RULES   (TOY ENGLISH).
+TEMPLATES   (TOY ENGLISH).
+GOVERNABLERELATIONS    SUBJ OBJ OBJ2 OBL OBL-?+ COMP XCOMP.
+SEMANTICFUNCTIONS    ADJUNCT  TOPIC.
+NONDISTRIBUTIVES    NUM PERS.
+EPSILON   e.
+OPTIMALITYORDER     NOGOOD.
+
+
+----
+
+TOY   ENGLISH   RULES (1.0)
+
+
+   S --> NP: (^ SUBJ)=!  
+	     (! CASE)=NOM; 
+ 	 VP: ^=!. 
+
+
+   VP --> V: ^=!;
+ 	  ({ NP: (^ OBJ)=! 
+		 (! CASE)= ACC
+ 	    |NP: (^ OBJ-TH) = !
+		 (! CASE) = DAT; 
+ 	     NP:(^ OBJ)= !
+		(!CASE) = ACC}) 
+ 	  PP*: { ! $ (^ ADJUNCT) 
+	       | (^ OBL)= !}.
+
+   NP --> (D) 
+ 	  N
+ 	  PP*:! $ (^ ADJUNCT)."$: nimm alles aus pp und tu es in die Menge"
+
+   PP --> P
+	  NP: { (^ OBJ) = !   "entweder semantische P mit OBJ"
+        	(! CASE)= ACC 
+		| ^=!}.    "Oder nicht semantisch --- gave to the dog"
+
+----
+
+TOY   ENGLISH   TEMPLATES (1.0)
+
+  
+   N-SG(P) = "singular noun"
+	  (^ PRED)='P'
+	  (^ PERS) ~= 3
+	  (^ DEF)
+	  @(NUMBER SG).
+   N-SG3(P) = "third person noun"
+	  (^ PRED) = 'P'
+	  (^ PERS) = 3
+	  @(NUMBER SG).
+
+   N-PL(P) = "Plural noun"
+	  (^ PRED)='P'
+	  (^ DEF)
+	  @(NUMBER PL).
+
+   NUMBER(P) = "assigns number"
+               (^ NUM)=P.
+
+
+   INTRANS(P) = (^ PRED)='P<(^ SUBJ)>'. 
+
+   TRANS(P) = (^ PRED)='P<(^ SUBJ)(^ OBJ)>'. 
+
+   OPTTRANS(P) = { @(INTRANS P)|@(TRANS P)}.
+
+   DITRANSOBJ(P) = (^ PRED)='P<(^ SUBJ)(^ OBJ)(^ OBJ-TH)>'. 
+   DITRANSOBL(P) =(^ PRED)='P<(^ SUBJ)(^ OBJ)(^ OBL)>'
+	  (^ OBL PCASE) =c TO."OBL-OPTION"
+	  
+
+   V3SG = (^ SUBJ NUM) = SG  "Singular, 3.Person"
+	  (^ SUBJ PERS) = 3
+          (^ TENSE) = PRES.
+
+   NONV3SG = { (^ SUBJ NUM)=PL "alle anderen Formen"
+	   |(^ SUBJ NUM)=SG
+	    (^ SUBJ PERS)~=3}.
+
+
+   PRSEM(P) = (^ PRED)='P<(^ OBJ)>' "Semantic Preposition, P requires Object, adjunctPP"
+	  (^ PTYPE)=SEM
+	  (^ OBJ CASE) = ACC.
+
+   PRNOSEM(P)= (^ PCASE)= P "Nonsematic P, Object of Verb, P assigns Argument"
+	  (^ PTYPE)=NOSEM
+	  (^ CASE)=DAT. "??"
+
+  
+----
+
+TOY   ENGLISH   LEXICON (1.0)
+
+pije 	  V * { (^ PRED)= 'DRINK<(^ SUBJ)>'
+	      | (^ PRED)= 'DRINK<(^ SUBJ)(^ OBJ)>' }
+	      @V3SG.
+
+kavu 	  N * @(N-SG3 coffee)
+	      (^ CASE)= ACC.
+
+vodu 	  N * @(N-SG3 water)
+	      (^ CASE)= ACC.
+
+sleep 	  V * @(INTRANS SLEEP)
+	      @NONV3SG.
+
+sleeps 	  V * @(INTRANS SLEEP)
+	      @V3SG.
+
+devour 	  V * @(TRANS DEVOUR)
+	      @NONV3SG.
+
+devours   V * @(TRANS DEVOUR)
+	      @V3SG.
+
+give 	  V * {@(DITRANSOBJ GIVE)|@(DITRANSOBL GIVE)}
+	      @NONV3SG.
+
+gives 	  V * {@(DITRANSOBJ GIVE)|@(DITRANSOBL GIVE)}
+	      @V3SG.
+
+kick 	  V * { (^ PRED) = 'KICK<(^ SUBJ)(^ OBJ)>'
+	      | (^ PRED) = 'KICK<(^ SUBJ)>'}
+	      @NONV3SG.
+
+kicks 	  V * { (^ PRED) = 'KICK<(^ SUBJ)(^ OBJ)>'
+	      | (^ PRED) = 'KICK<(^ SUBJ)>'}
+	      @V3SG.
+
+sheep 	  N * { @(N-SG3 SHEEP)|@(N-PL SHEEP)}.
+
+boy 	  N * @(N-SG3 BOY).
+
+park 	  N * @(N-SG3 PARK).
+
+computer  N * @(N-SG3 COMPUTER).
+
+bone 	  N * @(N-SG3 BONE).
+
+table 	  N * @(N-SG3 TABLE).
+
+zoo 	  N * @(N-SG3 ZOO).
+
+cage 	  N * @(N-SG3 CAGE).
+
+woman 	  N * @(N-SG3 WOMAN).
+
+tiger 	  N * @(N-SG3 TIGER).
+
+banana 	  N * @(N-SG3 BANANA).
+
+boys 	  N * @(N-PL BOY).
+
+girl 	  N * @(N-SG3 GIRL).
+
+girls 	  N * @(N-PL GIRL).
+
+the 	  D * (^ DEF)=+.
+
+a 	  D * (^ DEF)=+
+	      (^ NUM)=SG.
+              
+in        P * @(PRSEM IN).
+
+on 	  P * @(PRSEM ON).
+
+to 	  P * @(PRNOSEM TO).
+
+----

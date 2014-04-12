@@ -1,0 +1,26 @@
+FILES
+=====
+
+*.lfg	contains file with LFG grammar and lexical entries
+
+run XLE process, either by LFG menu in Aquamacs, OR command "xle" in command line
+
+XLE commands
+============
+
+create-parser *.lfg
+parse {<SENTENCE>}
+
+parse {djevojka pije kavu}
+
+parse {NP: taj covjek}
+
+
+PRINT XQUARTZ RESULTS TO .EPS GRAPHICS FILE INSTEAD
+===================================================
+
+all commands take optional filename argument
+
+print-tree
+print-fs
+print-fschart

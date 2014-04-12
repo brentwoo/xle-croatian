@@ -1,0 +1,6 @@
+Sentences that cfrag.lfg can handle
+===================================
+
+taj covjek joj ga je poklonio
+
+taj covjek je zivio u gradu

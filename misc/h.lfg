@@ -1,0 +1,172 @@
+
+DEMO   ENGLISH   CONFIG (1.0)
+  ROOTCAT   S.
+  FILES  .
+  LEXENTRIES   (DEMO ENGLISH).
+  RULES   (DEMO ENGLISH).
+  TEMPLATES   (DEMO ENGLISH).
+  GOVERNABLERELATIONS    SUBJ OBJ OBJ2 COMP XCOMP OBL OBL-?+.
+  SEMANTICFUNCTIONS    ADJUNCT  TOPIC FOCUS POSS STANDARD.
+  NONDISTRIBUTIVES    NUM PERS CONJ-FORM.
+  EPSILON   e.
+OPTIMALITYORDER NOGOOD.
+
+----
+
+DEMO   ENGLISH   RULES (1.0)
+
+
+   S --> e: (^ TENSE);
+	 (NP: (^ XCOMP* {OBJ|OBJ2})=!
+	      (^ TOPIC)=!)
+ 	 NP: (^ SUBJ)=!
+	     (! CASE)=NOM;
+ 	 { VP
+ 	  |VPaux}.
+
+   VP --> V
+ 	  (NP: (^ OBJ)=!
+	       (! CASE)=ACC)
+	  PP*:! $ (^ ADJUNCT).
+
+   VPaux --> AUX
+	     VP.
+
+   NP --> (D)
+ 	  N
+ 	  PP*:! $ (^ ADJUNCT).
+
+   PP --> P
+	  NP:(^ OBJ)=!
+	     (! CASE)=ACC.
+
+
+----
+DEMO   ENGLISH   TEMPLATES (1.0)
+
+   DET(P) = "assigns definite or indefinite"
+	    (^ P)=+.
+
+   N-SG(P) = "singular noun"
+	     (^ PRED)='P'
+	     @(NUMBER SG).
+
+   N-PL(P) = "singular noun"
+	     (^ PRED)='P'
+	     @(NUMBER PL).
+
+   NUMBER(P) = "assigns number"
+	       (^ NUM)=P.
+
+   TRANS(P) = "transitive verb"
+	      (^ PRED)='P<(^ SUBJ)(^ OBJ)>'.
+
+   INTRANS(P) = "intransitive verb"
+	      (^ PRED)='P<(^ SUBJ)>'.
+
+   PREP(P) = "semantic preposition"
+	     (^ PRED)='P<(^ OBJ)>'
+	     (^ OBJ PCASE)=P.
+
+   V3SG = "third singular verb form"
+	  (^ SUBJ NUM)= SG
+	  (^ SUBJ PERS)=3
+	  @VPRES.
+
+   NONV3SG = "non third singular verb form"
+	     @VPRES
+	     { (^ SUBJ NUM)=PL
+	      |(^ SUBJ NUM)=SG
+	       (^ SUBJ PERS)~=3}.
+
+   VPRES = (^ TENSE)=PRES.
+
+   VPAST = (^ TENSE)=PAST.
+
+----
+DEMO ENGLISH LEXICON (1.0)
+
+is 	  AUX * (^ TENSE)=PRES
+		(^ ASPECT)=PROG.
+
+in 	  P * @(PREP IN).
+
+with 	  P * @(PREP WITH).
+
+a 	  D * @(DET DEF).
+
+az 	  D * @(DET DEF).
+
+egy 	  D * @(DET INDEF)
+	      @(NUMBER SG).
+
+laany 	  N * @(N-SG GIRL).
+
+boys 	  N * @(N-PL BOY).
+
+banana 	  N * @(N-SG BANANA).
+
+park 	  N * @(N-SG PARK).
+
+telescope N * @(N-SG TELESCOPE).
+
+sheep 	  N * { @(N-SG SHEEP)
+	       |@(N-PL SHEEP)}.
+
+Mary      N * @(N-SG MARY).
+
+
+rajzolok   V * @(TRANS DRAW)
+	      @V1SG. 
+
+rajzolsz   V * @(TRANS DRAW)
+	      @V2SG. 
+
+rajzol   V * @(TRANS DRAW)
+	      @V3SG. 
+
+rajzolunk   V * @(TRANS DRAW)
+	      @V1PL. 
+
+rajzoltok   V * @(TRANS DRAW)
+	      @V2PL. 
+
+rajzolnak   V * @(TRANS DRAW)
+	      @V3PL. 
+
+kuqldoqk	      V * @(TRANS SEND)
+	      @V1SG. 
+
+kuqldesz	      V * @(TRANS SEND)
+	      @V2SG. 
+
+kuqld	      V * @(TRANS SEND)
+	      @V3SG. 
+
+kuqlduqnk	      V * @(TRANS SEND)
+	      @V1PL. 
+
+kuqldoqtoqk      V * @(TRANS SEND)
+	      @V2PL. 
+
+kuqldenek      V * @(TRANS SEND)
+	      @V3PL. 
+
+saw 	  V * @(TRANS SEE)
+	      @VPAST.
+
+
+talaalt 	  V * @(TRANS FIND)
+	      @VPAST.
+
+
+sleeping  V * @(INTRANS SLEEP)
+	      (^ ASPECT)=c PROG.
+
+sleeps 	  V * @(INTRANS SLEEP)
+	      @V3SG.
+
+walks 	  V * @(INTRANS WALK)
+	      @V3SG.
+
+----

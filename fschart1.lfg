@@ -1,0 +1,30 @@
+FEATURE STRUCTURE LEXICON (1.0)
+
+ FS1 FS *
+        (^ PRED) = 'KICK<%1 %2>'
+        (^ SUBJ) = %1
+        (^ OBJ) = %2
+        (^ ADJUNCT) = %3	   <<~a>>
+        (^ TENSE) = PRES
+        (%1 PRED) = 'GIRL'
+        (%1 CASE) = NOM
+        (%1 DEF) = +
+        (%1 NUM) = SG
+        (%1 PERS) = 3
+        (%2 PRED) = 'BOY'
+        (%2 ADJUNCT) = %4	   <<a>>
+        (%2 CASE) = ACC
+        (%2 DEF) = +
+        (%2 NUM) = SG
+        (%2 PERS) = 3
+        %5 $ %4	   <<a>>
+        (%5 PRED) = 'IN<%6>'
+        (%5 OBJ) = %6
+        (%5 PTYPE) = SEM
+        (%6 PRED) = 'ZOO'
+        (%6 CASE) = ACC
+        (%6 DEF) = +
+        (%6 NUM) = SG
+        (%6 PERS) = 3
+        %5 $ %3	   <<~a>>.
+----
